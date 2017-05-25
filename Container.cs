@@ -66,15 +66,6 @@ namespace lab03
             container.Sort(new ProductComparer(asc, column));
         }
 
-        public void sortAsc()
-        {
-            var asc = container.OrderBy(item => item.Name);
-        }
-
-        public void sortDesc()
-        {
-            var desc = container.OrderByDescending(item => item.Name);
-        }
         public override string ToString()
         {
             /// строки неизменяемый объект 
