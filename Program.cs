@@ -42,13 +42,10 @@ namespace lab03
             Console.WriteLine("Before sorting :");
             Console.WriteLine(container.ToString());
 
-            Console.WriteLine("After sorting by name  :");
-            container.Sort(true,"Name");
+            Console.WriteLine("After sorting  :");
+            container.Sort();
             Console.WriteLine(container.ToString());
-
-            Console.WriteLine("After sorting by price  :");
-            container.Sort(true, "Price");
-            Console.WriteLine(container.ToString());
+  
 
             Console.WriteLine("After removed the second element :");
             Console.WriteLine(container.ToString());

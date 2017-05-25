@@ -5,7 +5,7 @@ using System.Text;
 
 namespace lab03
 {
-    public class Product
+    public class Product : IComparable
     {
         private decimal price;
 
@@ -39,6 +39,13 @@ namespace lab03
         public override string ToString()
         {
              return string.Format("Name:{Name},price:{price}");
+        }
+
+        public int CompareTo(object obj)
+        {
+            Product otherDonator = (Product)obj;
+
+            return this.Name.CompareTo(otherDonator.Name);
         }
     }
 }

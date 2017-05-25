@@ -9,11 +9,14 @@ namespace lab03
 {
     public class Container
     {
-        private List<Product> container;
+        private const int SIZE = 5;
+        private Product[] container;
+        private int lastIndex;
 
         public Container()
         {
-            container = new List<Product>();
+           lastIndex = 0;
+           container = new Product[SIZE];
         }
 
         /// <summary>
@@ -22,7 +25,8 @@ namespace lab03
         /// <param name="product"></param>
         public void Add(Product product)
         {
-            container.Add(product);
+            container[lastIndex] = product;
+            lastIndex++;
         }
 
         /// <summary>
@@ -31,11 +35,22 @@ namespace lab03
         /// <param name="index"></param>
         public void deleteByIndex(int index)
         {
-            Product product = getByIndex(index);
+           
+            int j = 0;
+            Product[] temp = new Product[SIZE];
+            for (var i = 0; i < container.Length;i++)
+            {
+                if (i != index)
+                    temp[j] = container[i];
+            }
 
-            // если есть такой елемент 
-            if (product != null)
-                container.RemoveAt(index);
+            container = new Product[SIZE];
+
+            for(var i = 0; i< temp.Length; i++)
+            {
+                container[i] = temp[i];
+            }
+
         }
 
 
@@ -49,11 +64,11 @@ namespace lab03
             Product product = null;
 
             // если контейнер не создан или пуст 
-            if (container == null || container.Count < 1)
+            if (container == null || container.Length < 1)
                 return product;
 
             /// если заданный индекс за пределами 
-            if (index < 0 || index > container.Count)
+            if (index < 0 || index > container.Length)
                 return product;
 
             product = container.ElementAt(index);
@@ -61,9 +76,9 @@ namespace lab03
             return product;               
         }
 
-        public void Sort(bool asc, string column)
+        public void Sort()
         {
-            container.Sort(new ProductComparer(asc, column));
+            Array.Sort(container);            
         }
 
         public override string ToString()
