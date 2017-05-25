@@ -24,7 +24,7 @@ namespace lab03
 
         private string name;
 
-        private string Name
+        public string Name
         {
             get
             {
