@@ -15,7 +15,21 @@ namespace lab03
             product.Name = "Book";
             product.Price = 12.32m;// m - because decimal 
 
-            Container container = new Container();
+            Container container = null;// new Container();
+
+            // поймать сгенерированное нами исключение 
+            try
+            {
+                //сгенерировать исключение 
+                container = new Container(0);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            // initialise container
+            container = new Container(4);
+
             container.Add(product);
 
             product = new Product();
@@ -25,7 +39,7 @@ namespace lab03
 
             product = new Product();
             product.Name = "Book7";
-            product.Price = 13.72m;      
+            product.Price = 13.72m;
             container.Add(product);
 
             product = new Product();
@@ -33,9 +47,14 @@ namespace lab03
             product.Price = 72.32m;
             container.Add(product);
 
-
             product = new Product();
             product.Name = "Book2";
+            product.Price = 32.32m;
+            container.Add(product);
+
+            // exception - выход за пределы массива 
+            product = new Product();
+            product.Name = "Book17";
             product.Price = 32.32m;
             container.Add(product);
 
@@ -45,7 +64,16 @@ namespace lab03
             Console.WriteLine("After sorting  :");
             container.Sort();
             Console.WriteLine(container.ToString());
-  
+
+            try
+            {
+                // exception - выход за пределы массива 
+                container.deleteByIndex(10);
+            }
+            catch (IndexOutOfRangeException ex)
+            {
+                Console.WriteLine("Incorrect index");
+            }
 
             Console.WriteLine("After removed the second element :");
             Console.WriteLine(container.ToString());

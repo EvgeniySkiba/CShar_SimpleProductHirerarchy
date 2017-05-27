@@ -9,14 +9,19 @@ namespace lab03
 {
     public class Container
     {
-        private const int SIZE = 5;
+        private int size;
         private Product[] container;
         private int lastIndex;
 
-        public Container()
+        public Container(int size_)
         {
-           lastIndex = 0;
-           container = new Product[SIZE];
+            lastIndex = 0;
+
+            if (size_ <= 0)
+                throw new ArgumentException("incorrect argument for initialize  array.");
+
+            container = new Product[size_];
+            size = size_;
         }
 
         /// <summary>
@@ -25,8 +30,15 @@ namespace lab03
         /// <param name="product"></param>
         public void Add(Product product)
         {
-            container[lastIndex] = product;
-            lastIndex++;
+            try
+            {
+                container[lastIndex] = product;
+                lastIndex++;
+            }
+            catch (IndexOutOfRangeException ex)
+            {
+                Console.WriteLine("Incorrect index");
+            }
         }
 
         /// <summary>
@@ -35,18 +47,20 @@ namespace lab03
         /// <param name="index"></param>
         public void deleteByIndex(int index)
         {
-           
+            if (index < 0 || index > size)
+                throw new IndexOutOfRangeException("An incorrect index is specified when deleting an item");
+
             int j = 0;
-            Product[] temp = new Product[SIZE];
-            for (var i = 0; i < container.Length;i++)
+            Product[] temp = new Product[size];
+            for (var i = 0; i < container.Length; i++)
             {
                 if (i != index)
                     temp[j] = container[i];
             }
 
-            container = new Product[SIZE];
+            container = new Product[size];
 
-            for(var i = 0; i< temp.Length; i++)
+            for (var i = 0; i < temp.Length; i++)
             {
                 container[i] = temp[i];
             }
@@ -62,23 +76,30 @@ namespace lab03
         private Product getByIndex(int index)
         {
             Product product = null;
+            try
+            {
+                // если контейнер не создан или пуст 
+                if (container == null || container.Length < 1)
+                    return product;
 
-            // если контейнер не создан или пуст 
-            if (container == null || container.Length < 1)
+                /// если заданный индекс за пределами 
+                if (index < 0 || index > container.Length)
+                    return product;
+
+                product = container.ElementAt(index);
                 return product;
 
-            /// если заданный индекс за пределами 
-            if (index < 0 || index > container.Length)
+            }
+            catch (IndexOutOfRangeException ex)
+            {
+                Console.WriteLine("Incorrect index");
                 return product;
-
-            product = container.ElementAt(index);
-
-            return product;               
+            }
         }
 
         public void Sort()
         {
-            Array.Sort(container);            
+            Array.Sort(container);
         }
 
         public override string ToString()
