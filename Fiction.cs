@@ -21,6 +21,8 @@ namespace lab03
             }
             set
             {
+                if (timeOfAction < 0)
+                    throw new ArgumentException("incorrect timeOfAction value");
                 timeOfAction = value;
             }
         }
@@ -34,6 +36,8 @@ namespace lab03
 
             set
             {
+                if (ageLimit < 0)
+                    throw new ArgumentException("incorrect ageLimit value");
                 ageLimit = value;
             }
         }

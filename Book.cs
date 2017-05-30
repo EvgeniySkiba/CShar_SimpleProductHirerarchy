@@ -22,6 +22,8 @@ namespace lab03
             }
             set
             {
+                if (rating < 0)
+                    throw new ArgumentException("incorrect rating value");
                 rating = value;
             }
         }
@@ -35,6 +37,9 @@ namespace lab03
 
             set
             {
+                if(uploadDate<0)
+                    throw new ArgumentNullException("incorrect date value");
+
                 uploadDate = value;
             }
         }
@@ -48,6 +53,8 @@ namespace lab03
 
             set
             {
+                if (publisher < 0)
+                    throw new ArgumentException("incorrect publisher value");
                 publisher = value;
             }
         }
@@ -61,6 +68,8 @@ namespace lab03
 
             set
             {
+                if (publisher < 0)
+                    throw new ArgumentException("incorrect language value");
                 language = value;
             }
         }
@@ -74,6 +83,8 @@ namespace lab03
 
             set
             {
+                if(publisher < 0)
+                    throw new ArgumentException("incorrect translation value");
                 translation = value;
             }
         }

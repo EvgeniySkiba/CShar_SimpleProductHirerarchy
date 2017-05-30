@@ -22,6 +22,8 @@ namespace lab03
 
             set
             {
+                if (released < 0)
+                    throw new ArgumentException("incorrect released value");
                 released = value;
             }
         }

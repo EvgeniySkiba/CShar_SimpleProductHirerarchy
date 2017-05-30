@@ -18,6 +18,8 @@ namespace lab03
 
             set
             {
+                if(price < 0 )
+                    throw new ArgumentException("incorrect price value");
                 price = value;
             }
         }
